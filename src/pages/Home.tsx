@@ -6,7 +6,6 @@ const Home = () => {
   return (
     <>
       <Layout>
-        <Header />
         <div>
           <Link to="view">viewClass</Link>
           <Link to="add">addClass</Link>
