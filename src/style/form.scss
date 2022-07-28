@@ -1,0 +1,161 @@
+@import "index.scss";
+
+.form {
+  &-list {
+    @include flexAlignCenter;
+    margin-bottom: 2.5rem;
+    h3 {
+      width: 10rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &-select {
+    @include flexAlignCenter;
+    margin-right: 1rem;
+    select {
+      width: 5rem;
+      height: 2.4rem;
+      padding: 0 0.5rem;
+      border-radius: 0;
+      border: 1px solid $BORDER;
+      font-size: 0.9rem;
+      -o-appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      cursor: pointer;
+      background: url("../images/icon_arrow_unfold.svg") center right 0.6rem
+        no-repeat;
+      &::-ms-expand {
+        display: none;
+      }
+    }
+    span {
+      margin: 0 0.5rem;
+    }
+  }
+
+  &-radio {
+    input {
+      & + label {
+        display: inline-block;
+        margin-right: 0.5rem;
+        width: 3.4rem;
+        line-height: 2.3rem;
+        text-align: center;
+        border: 1px solid $BORDER;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+      &:checked + label {
+        background: $BUTTON_CHECKED;
+        color: $WHITE;
+        border: 1px solid $BUTTON_CHECKED;
+      }
+    }
+  }
+  &-start {
+    @include flexAlignCenter;
+  }
+  &-repeat {
+    @include flexAlignCenter;
+    flex: 1;
+  }
+  &-check {
+    @include flexAlignCenter;
+    flex: 1;
+    margin-right: 0.5rem;
+    input {
+      & + label {
+        flex: 1;
+        border: 1px solid $BORDER;
+        line-height: 2.6rem;
+        text-align: center;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+      &:checked + label {
+        background: $BUTTON_CHECKED;
+        color: $WHITE;
+        border: 1px solid $BUTTON_CHECKED;
+      }
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  &-btn {
+    float: right;
+    margin-top: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .form {
+    &-list {
+      display: block;
+      h3 {
+        margin-bottom: 1rem;
+        width: auto;
+        font-size: 1.1rem;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .form {
+    &-repeat {
+      flex-wrap: wrap;
+    }
+    &-check {
+      margin-top: 0.5rem;
+      flex: initial;
+      width: 32%;
+
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+      &:nth-child(-n + 3) {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .form {
+    &-start {
+      flex-wrap: wrap;
+    }
+    &-select {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+    &-check {
+      flex: initial;
+      width: 48.5%;
+      margin-top: 0.5rem;
+      &:nth-child(3n) {
+        margin-right: 0.5rem;
+      }
+      &:nth-child(-n + 3) {
+        margin-top: 0.5rem;
+      }
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+      &:nth-child(-n + 2) {
+        margin-top: 0;
+      }
+    }
+  }
+}

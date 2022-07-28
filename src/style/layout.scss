@@ -1,0 +1,65 @@
+@import "index.scss";
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: $MAIN;
+  padding: 0.5rem 2rem;
+}
+
+.wrap {
+  min-height: 100vh;
+  height: 100%;
+  background-color: $GRAYE;
+  padding: 8rem 2rem 2rem;
+}
+
+.content-wrap {
+  padding: 2rem;
+  background-color: $WHITE;
+  border-radius: 0.5rem;
+}
+
+.title {
+  @include flexBetween;
+  margin-bottom: 2rem;
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+}
+
+.btn {
+  &-type1 {
+    display: inline-block;
+    padding: 0.9rem 1.2rem;
+    background-color: $MAIN;
+    color: $WHITE;
+    border-radius: 0.3rem;
+  }
+  &.large {
+    min-width: 10rem;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 0.5rem 1rem;
+  }
+  .wrap {
+    padding: 7rem 1rem 2rem;
+  }
+  .content-wrap {
+    padding: 1rem 1rem;
+  }
+  .title {
+    margin-bottom: 1.5rem;
+    h2 {
+      font-size: 1.2rem;
+    }
+  }
+}

@@ -2,26 +2,17 @@ import React from "react";
 import Header from "../components/layout/Header";
 import Layout from "../components/layout/Layout";
 // import tw from "tailwind-styled-components";
+import AddForm from "../components/schedule/form/AddForm";
+import "../style/form.scss";
 
 const AddClass = () => {
   return (
     <>
       <Layout>
-        <Header />
-        <div className="flex flex-col w-full lg:w-4/5 mx-auto">
-          <div>
-            <h1 className="ml-0 m-7 mt-12 text-3xl font-bold">
-              Add Class Schedule
-            </h1>
-          </div>
-          <div>
-            <div>
-              <span>start time :</span>
-              <span>repeat on :</span>
-            </div>
-          </div>
-          <button className="self-end">save</button>
+        <div className="title">
+          <h2>Add Class schedule</h2>
         </div>
+        <AddForm />
       </Layout>
     </>
   );
