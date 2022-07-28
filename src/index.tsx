@@ -1,16 +1,29 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import Routes from "./router/Routes";
-import { RecoilRoot } from "recoil";
-import "./style/index.scss";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Routes from './router/Routes';
+import { RecoilRoot } from 'recoil';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import './style/index.scss';
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+      staleTime: 1000 * 60,
+    },
+  },
+});
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <RecoilRoot>
-      <Routes />
-    </RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <RecoilRoot>
+        <Routes />
+      </RecoilRoot>
+    </QueryClientProvider>
   </React.StrictMode>
 );
