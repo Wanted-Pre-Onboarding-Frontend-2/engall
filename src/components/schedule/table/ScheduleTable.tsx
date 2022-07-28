@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Time from "../cards/Time";
 import { ScheduleList, ScheduleProps } from "../../../types/schedule";
 import { AiFillCloseCircle } from "react-icons/ai";
+import Popup from "../../layout/Popup";
 
-// interface TableProps {
-//   weekday: string;
-//   data: ScheduleProps[];
-// }
+const ScheduleTable = () => {
+  const [popupOpen, setPopupOpen] = useState(false);
 
-const Table = () => {
+  const popupHandler = (status: boolean) => {
+    setPopupOpen(status);
+  };
+  const deleteHandler = () => {
+    alert("삭제완료");
+    setPopupOpen(false);
+  };
   return (
     <div className="content-wrap table-wrap">
       {[
@@ -28,7 +33,7 @@ const Table = () => {
                 <span>10:00 AM -</span>
                 <span>10:40 AM</span>
               </p>
-              <button type="button">
+              <button type="button" onClick={() => popupHandler(true)}>
                 <AiFillCloseCircle />
               </button>
             </li>
@@ -37,15 +42,23 @@ const Table = () => {
                 <span>10:00 AM -</span>
                 <span>10:40 AM</span>
               </p>
-              <button type="button">
+              <button type="button" onClick={() => popupHandler(true)}>
                 <AiFillCloseCircle />
               </button>
             </li>
           </ul>
         </div>
       ))}
+      <Popup
+        data={{ yoil: "Monday", time: ["09:00", "9:40", "am"] }}
+        text="수업을 삭제하시겠습니까?"
+        confirm={true}
+        open={popupOpen}
+        openClose={() => popupHandler(false)}
+        onClickHandler={deleteHandler}
+      />
     </div>
   );
 };
 
-export default Table;
+export default ScheduleTable;
