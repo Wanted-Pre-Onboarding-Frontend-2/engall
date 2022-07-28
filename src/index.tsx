@@ -1,13 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import Routes from "./router/Routes";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Routes from './router/Routes';
+import { RecoilRoot } from 'recoil';
+import './styles/index.scss';
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Routes />
+    <RecoilRoot>
+      <Routes />
+    </RecoilRoot>
   </React.StrictMode>
 );
