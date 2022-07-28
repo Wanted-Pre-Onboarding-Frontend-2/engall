@@ -1,0 +1,133 @@
+{
+  "card" : {  
+    "monday": 
+    [  {
+      "id": "sdfsdfsdfer",
+      "tutor": "pika",
+    "time": ["09:00", "10:00", "am"]},
+    {
+      "id": "sdffer11",
+      "tutor": "pika",
+    "time": ["10:00", "11:00","am"]},
+    {
+      "id": "sdfsffer11",
+      "tutor": "pika",
+    "time": ["02:00", "03:00", "pm"]},
+    {
+      "id": "sdf2343241",
+      "tutor": "pika",
+    "time": ["07:00", "08:00", "pm"]}
+  ],
+  "tuesday": 
+  [  {
+    "id": "111sdfsdfsdfer",
+    "tutor": "pika",
+    "time": ["09:00", "10:00", "am"]},
+  {
+    "id": "111sdffer11",
+    "tutor": "pika",
+    "time": ["10:00", "11:00","am"]},
+  {
+    "id": "111sdfsffer11",
+    "tutor": "pika",
+    "time": ["02:00", "03:00", "pm"]},
+  {
+    "id": "111sdf2343241",
+    "tutor": "pika",
+    "time": ["07:00", "08:00", "pm"]}
+],
+"wednesday": 
+[  {
+  "id": "222sdfsdfsdfer",
+  "tutor": "pika",
+  "time": ["09:00", "10:00", "am"]},
+{
+  "id": "222sdffer11",
+  "tutor": "pika",
+  "time": ["10:00", "11:00","am"]},
+{
+  "id": "222sdfsffer11",
+  "tutor": "pika",
+  "time": ["02:00", "03:00", "pm"]},
+{
+  "id": "222sdf2343241",
+  "tutor": "pika",
+  "time": ["07:00", "08:00", "pm"]}
+],
+"thursday": 
+[  {
+  "id": "333sdfsdfsdfer",
+  "tutor": "pika",
+  "time": ["09:00", "10:00", "am"]},
+{
+  "id": "333sdffer11",
+  "tutor": "pika",
+  "time": ["10:00", "11:00","am"]},
+{
+  "id": "333sdfsffer11",
+  "tutor": "pika",
+  "time": ["02:00", "03:00", "pm"]},
+{
+  "id": "333sdf2343241",
+  "tutor": "pika",
+  "time": ["07:00", "08:00", "pm"]}
+],
+"friday": 
+[  {
+  "id": "444sdfsdfsdfer",
+  "tutor": "pika",
+  "time": ["09:00", "10:00", "am"]},
+{
+  "id": "444sdffer11",
+  "tutor": "pika",
+  "time": ["10:00", "11:00","am"]},
+{
+  "id": "444sdfsffer11",
+  "tutor": "pika",
+  "time": ["02:00", "03:00", "pm"]},
+{
+  "id": "444sdf2343241",
+  "tutor": "pika",
+  "time": ["07:00", "08:00", "pm"]}
+],
+"saturday": 
+[  {
+  "id": "555sdfsdfsdfer",
+  "tutor": "pika",
+  "time": ["09:00", "10:00", "am"]},
+{
+  "id": "555sdffer11",
+  "tutor": "pika",
+  "time": ["10:00", "11:00","am"]},
+{
+  "id": "555sdfsffer11",
+  "tutor": "pika",
+  "time": ["02:00", "03:00", "pm"]},
+{
+  "id": "555sdf2343241",
+  "tutor": "pika",
+  "time": ["07:00", "08:00", "pm"]}
+],
+"sunday": 
+[  {
+  "id": "777sdfsdfsdfer",
+  "tutor": "pika",
+  "time": ["09:00", "10:00", "am"]},
+{
+  "id": "777sdffer11",
+  "tutor": "pika",
+  "time": ["10:00", "11:00","am"]},
+{
+  "id": "777sdfsffer11",
+  "tutor": "pika",
+  "time": ["02:00", "03:00", "pm"]},
+{
+  "id": "777sdf2343241",
+  "tutor": "pika",
+  "time": ["07:00", "08:00", "pm"]}
+]
+  }
+}
+
+    
+      
