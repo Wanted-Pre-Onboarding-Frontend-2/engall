@@ -4,7 +4,7 @@ interface PopupProps {
   data?: dataType;
   text: string;
   confirm?: boolean;
-  openClose: () => void;
+  onCloseHandler: () => void;
   onClickHandler?: () => void;
   open: boolean;
 }
@@ -19,7 +19,7 @@ const Popup = ({
   text,
   confirm,
   open,
-  openClose,
+  onCloseHandler,
   onClickHandler,
 }: PopupProps) => {
   return (
@@ -47,7 +47,7 @@ const Popup = ({
               <button
                 type="button"
                 className="btn btn-type2 medium"
-                onClick={openClose}
+                onClick={onCloseHandler}
               >
                 NO
               </button>
@@ -56,7 +56,7 @@ const Popup = ({
             <button
               type="button"
               className="btn btn-type1 medium"
-              onClick={openClose}
+              onClick={onCloseHandler}
             >
               close
             </button>
