@@ -54,7 +54,7 @@ const ScheduleTable = () => {
         text="수업을 삭제하시겠습니까?"
         confirm={true}
         open={popupOpen}
-        openClose={() => popupHandler(false)}
+        onCloseHandler={() => popupHandler(false)}
         onClickHandler={deleteHandler}
       />
     </div>
