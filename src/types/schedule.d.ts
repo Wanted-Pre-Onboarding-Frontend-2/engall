@@ -1,11 +1,11 @@
 interface Schedule {
-  monday: object[];
-  tuesday: object[];
-  wednesday: object[];
-  thursday: object[];
-  friday: object[];
-  saturday: object[];
-  sunday: object[];
+  monday: string[];
+  tuesday: string[];
+  wednesday: string[];
+  thursday: string[];
+  friday: string[];
+  saturday: string[];
+  sunday: string[];
 }
 
 interface ScheduleProps {
