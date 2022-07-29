@@ -34,7 +34,7 @@ const ScheduleTable = () => {
     <div className="content-wrap table-wrap">
       {daysOfWeek.map((yoil: string, index: number) => (
         <div key={yoil + index} className="table-content">
-          <h3>{yoil}</h3>
+          <h3>{yoil.charAt(0).toUpperCase() + yoil.slice(1)}</h3>
           <ul className="table-lists">
             {data &&
               Object.values(data).map(
