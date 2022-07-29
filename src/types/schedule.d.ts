@@ -1,16 +1,3 @@
-type DayOfWeek =
-  | 'monday'
-  | 'tuesday'
-  | 'wednesday'
-  | 'thursday'
-  | 'friday'
-  | 'saturday'
-  | 'sunday';
-
-interface DaySchedule {
-  DayOfWeek: string[];
-}
-
 interface Schedule {
   monday: string[];
   tuesday: string[];
@@ -29,4 +16,4 @@ interface ScheduleProps {
 
 type ScheduleList = ScheduleProps[];
 
-export { ScheduleProps, ScheduleList, Schedule, DaySchedule };
+export { ScheduleProps, ScheduleList, Schedule };
