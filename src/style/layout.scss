@@ -62,7 +62,11 @@
     line-height: 2.5rem;
   }
 }
-
+//home
+.btn-box {
+  display: flex;
+  justify-content: space-around;
+}
 //popup
 .popup {
   display: none;
