@@ -19,7 +19,7 @@ const AddForm = () => {
     setPopupOpen(status);
   };
 
-  const [day, setDay] = useState<string[]>([]);
+  const [days, setDays] = useState<string[]>([]);
   const [times, setTimes] = useState<any>({
     hour: "00",
     minute: "00",
@@ -36,7 +36,7 @@ const AddForm = () => {
     const checked = event.target.checked;
 
     if (checked) {
-      setDay([...day, event.target.value]);
+      setDays([...days, event.target.value]);
     }
   };
 
@@ -67,11 +67,15 @@ const AddForm = () => {
     const startTime = format(startAddTime, "HH:mm");
     const endTime = format(endAddTime, "HH:mm");
 
-    const newSchedule: NewSchedule = {
-      days: day,
-      start: startTime + " " + times.meridiem,
-      end: endTime + " " + times.meridiem,
-    };
+    const newSchedule: any = [];
+
+    days.map((day: string) => {
+      newSchedule.push({
+        day: day,
+        start: startTime + " " + times.meridiem,
+        end: endTime + " " + times.meridiem,
+      });
+    });
 
     mutate(newSchedule);
 
