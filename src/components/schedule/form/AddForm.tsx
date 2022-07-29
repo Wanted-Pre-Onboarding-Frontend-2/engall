@@ -3,6 +3,8 @@ import axios from "axios";
 import React, { FormEvent, ChangeEvent, useCallback, useState } from "react";
 import { NewClass } from "../../../types/schedule";
 import { getSchedule } from "../../../api/httpRequest";
+import { add, format } from "date-fns";
+import { time } from "console";
 
 const yoils = [
   "monday",
@@ -14,7 +16,16 @@ const yoils = [
   "sunday",
 ];
 
-const createSchedule = async (data: NewClass) => {
+const date = new Date();
+const today = format(date, "yyyy-MM-dd");
+
+interface dataTypes {
+  days: string[];
+  start: string;
+  end: string;
+}
+
+const createSchedule = async (data: dataTypes) => {
   const { data: response } = await axios.post(
     "http://localhost:8000/schedule",
     data
@@ -27,8 +38,8 @@ const AddForm = () => {
 
   const [schedule, setSchedule] = useState([]);
 
-  const [day, setDay] = useState<any>([]);
-  const [times, setTimes] = useState({
+  const [day, setDay] = useState<string[]>([]);
+  const [times, setTimes] = useState<any>({
     hour: "00",
     minute: "00",
     time: "am",
@@ -36,6 +47,7 @@ const AddForm = () => {
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
+
     setTimes({ ...times, [name]: value });
   };
 
@@ -65,7 +77,28 @@ const AddForm = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     // TODO: form onSubmit
     e.preventDefault();
-    mutate(day);
+
+    const startTimeStr = `${times.hour}:${times.minute}`;
+    const submitDate = new Date(`${today} ${startTimeStr}`);
+
+    const startAddTime = add(submitDate, {
+      hours: times.time === "pm" ? 12 : 0,
+    });
+    const endAddTime = add(submitDate, {
+      hours: times.time === "pm" ? 12 : 0,
+      minutes: 40,
+    });
+
+    const startTime = format(startAddTime, "HH:mm");
+    const endTime = format(endAddTime, "HH:mm");
+
+    const newData: dataTypes = {
+      days: day,
+      start: startTime + " " + times.time,
+      end: endTime + " " + times.time,
+    };
+
+    mutate(newData);
   };
 
   return (
@@ -90,6 +123,8 @@ const AddForm = () => {
                 <option value="10">10</option>
                 <option value="15">15</option>
                 <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
               </select>
             </div>
             <div className="form-radio">
