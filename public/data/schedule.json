@@ -2,37 +2,37 @@
   "card": [
     {
       "id": 0,
-      "days": ["monday", "tuesday"],
+      "day": "monday",
       "start": "14:20 pm",
       "end": "15:00 pm"
     },
     {
       "id": 1,
-      "days": ["tuesday"],
+      "day": "tuesday",
       "start": "10:00 am",
       "end": "10:40 am"
     },
     {
       "id": 2,
-      "days": ["tuesday", "wednesday"],
+      "day": "wednesday",
       "start": "11:20 am",
       "end": "11:00 am"
     },
     {
       "id": 3,
-      "days": ["wednesday", "thursday"],
+      "day": "thursday",
       "start": "13:10 pm",
       "end": "13:50 pm"
     },
     {
       "id": 4,
-      "days": ["wednesday"],
+      "day": "friday",
       "start": "14:00 pm",
       "end": "14:40 pm"
     },
     {
       "id": 5,
-      "days": ["thursday", "friday"],
+      "day": "friday",
       "start": "15:00 pm",
       "end": "15:40 pm"
     }
