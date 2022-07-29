@@ -1,29 +1,29 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import React, { FormEvent, ChangeEvent, useState } from "react";
-import { NewSchedule } from "../../../types/schedule";
-import { createSchedule } from "../../../api/httpRequest";
-import { add, format } from "date-fns";
-import { HOURS, MINUTES, MERIDIEMS, daysOfWeek } from "../../../utils/getDate";
-import { useNavigate } from "react-router-dom";
-import Popup from "../../layout/Popup";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import React, { FormEvent, ChangeEvent, useState } from 'react';
+import { NewSchedule } from '../../../types/schedule';
+import { createSchedule } from '../../../api/httpRequest';
+import { add, format } from 'date-fns';
+import { HOURS, MINUTES, MERIDIEMS, daysOfWeek } from '../../../utils/getDate';
+import { useNavigate } from 'react-router-dom';
+import Popup from '../../layout/Popup';
 
 const date = new Date();
-const today = format(date, "yyyy-MM-dd");
+const today = format(date, 'yyyy-MM-dd');
 
 const AddForm = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const [popupOpen, setPopupOpen] = useState(true);
+  const [popupOpen, setPopupOpen] = useState<boolean>(true);
   const popupHandler = (status: boolean) => {
     setPopupOpen(status);
   };
 
   const [days, setDays] = useState<string[]>([]);
   const [times, setTimes] = useState<any>({
-    hour: "00",
-    minute: "00",
-    meridiem: "am",
+    hour: '00',
+    minute: '00',
+    meridiem: 'am',
   });
 
   const handleChange = (event: any) => {
@@ -45,7 +45,7 @@ const AddForm = () => {
       console.log(variables);
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries(["schedule"]);
+      queryClient.invalidateQueries(['schedule']);
     },
     onSettled: () => {},
   });
@@ -57,70 +57,70 @@ const AddForm = () => {
     const submitDate = new Date(`${today} ${startTimeStr}`);
 
     const startAddTime = add(submitDate, {
-      hours: times.time === "pm" ? 12 : 0,
+      hours: times.time === 'pm' ? 12 : 0,
     });
     const endAddTime = add(submitDate, {
-      hours: times.time === "pm" ? 12 : 0,
+      hours: times.time === 'pm' ? 12 : 0,
       minutes: 40,
     });
 
-    const startTime = format(startAddTime, "HH:mm");
-    const endTime = format(endAddTime, "HH:mm");
+    const startTime = format(startAddTime, 'HH:mm');
+    const endTime = format(endAddTime, 'HH:mm');
 
     const newSchedule: any = [];
 
     days.map((day: string) => {
       newSchedule.push({
         day: day,
-        start: startTime + " " + times.meridiem,
-        end: endTime + " " + times.meridiem,
+        start: startTime + ' ' + times.meridiem,
+        end: endTime + ' ' + times.meridiem,
       });
     });
 
     mutate(newSchedule);
 
-    alert("추가되었습니다.");
-    navigate("/view");
+    alert('추가되었습니다.');
+    navigate('/view');
   };
 
   return (
-    <form method="post" onSubmit={handleSubmit}>
-      <div className="content-wrap">
-        <div className="form-list">
+    <form method='post' onSubmit={handleSubmit}>
+      <div className='content-wrap'>
+        <div className='form-list'>
           <h3>Start Time</h3>
-          <div className="form-start">
-            <div className="form-select">
+          <div className='form-start'>
+            <div className='form-select'>
               <select
-                name="hour"
-                id="hour"
+                name='hour'
+                id='hour'
                 onChange={handleChange}
                 value={times.hour}
               >
                 {HOURS.map((hour: string, index: number) => (
-                  <option value={hour} key={hour + "-" + index}>
+                  <option value={hour} key={hour + '-' + index}>
                     {hour}
                   </option>
                 ))}
               </select>
               <span>:</span>
               <select
-                name="minute"
-                id="minute"
+                name='minute'
+                id='minute'
                 onChange={handleChange}
                 value={times.minute}
               >
                 {MINUTES.map((minute: string, index) => (
-                  <option value={minute} key={minute + "-" + index}>
+                  <option value={minute} key={minute + '-' + index}>
                     {minute}
                   </option>
                 ))}
               </select>
             </div>
             {MERIDIEMS.map((meridiem) => (
-              <div className="form-radio" key={meridiem}>
+              <div className='form-radio' key={meridiem}>
                 <input
-                  type="radio"
-                  name="time"
+                  type='radio'
+                  name='time'
                   id={meridiem}
                   onChange={handleChange}
                   value={meridiem}
@@ -130,14 +130,14 @@ const AddForm = () => {
             ))}
           </div>
         </div>
-        <div className="form-list">
+        <div className='form-list'>
           <h3>Repeat on</h3>
-          <div className="form-repeat">
+          <div className='form-repeat'>
             {daysOfWeek.map((day) => (
-              <div className="form-check" key={day}>
+              <div className='form-check' key={day}>
                 <input
-                  type="checkbox"
-                  name="days"
+                  type='checkbox'
+                  name='days'
                   id={day}
                   value={day}
                   onChange={handleChangeCheckbox}
@@ -148,14 +148,14 @@ const AddForm = () => {
           </div>
         </div>
       </div>
-      <button type="submit" className="btn btn-type1 large form-btn">
+      <button type='submit' className='btn btn-type1 large form-btn'>
         Save
       </button>
-      <Popup
-        text="중복된 시간입니다."
+      {/* <Popup
+        text='중복된 시간입니다.'
         open={popupOpen}
         onCloseHandler={() => popupHandler(false)}
-      />
+      /> */}
     </form>
   );
 };
