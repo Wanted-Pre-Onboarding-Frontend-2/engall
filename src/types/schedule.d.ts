@@ -7,8 +7,8 @@ type DayOfWeek =
   | 'saturday'
   | 'sunday';
 
-interface DaySchedule {
-  DayOfWeek: string[];
+interface NewClass {
+  DayOfWeek: [id: string, time: stringp[]];
 }
 
 interface Schedule {
@@ -29,4 +29,4 @@ interface ScheduleProps {
 
 type ScheduleList = ScheduleProps[];
 
-export { ScheduleProps, ScheduleList, Schedule, DaySchedule };
+export { ScheduleProps, ScheduleList, Schedule, NewClass };
