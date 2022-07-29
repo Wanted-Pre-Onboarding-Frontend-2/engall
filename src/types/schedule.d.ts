@@ -29,4 +29,4 @@ interface ScheduleProps {
 
 type ScheduleList = ScheduleProps[];
 
-export { ScheduleProps, ScheduleList, Schedule };
+export { ScheduleProps, ScheduleList, Schedule, DaySchedule };
