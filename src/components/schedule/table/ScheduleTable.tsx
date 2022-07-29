@@ -16,8 +16,13 @@ const ScheduleTable = () => {
   const { data } = useQuery<Schedule[] | any>(['schedule'], () =>
     getSchedule()
   );
+  const queryClient = useQueryClient();
 
-  const deleteMutation = useMutation((id: number) => deleteSchedule(id));
+  const deleteMutation = useMutation((id: number) => deleteSchedule(id), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['schedule']);
+    },
+  });
   // deleteMutaion.mutate(data.id)
 
   const popupHandler = (status: boolean, time?: object | any) => {
@@ -27,7 +32,7 @@ const ScheduleTable = () => {
   const deleteHandler = (id: number) => {
     alert('삭제완료');
     setPopupOpen(false);
-    deleteMutation.mutate(data.id);
+    deleteMutation.mutate(id);
   };
 
   return (
