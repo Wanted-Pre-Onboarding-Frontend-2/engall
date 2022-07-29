@@ -10,8 +10,9 @@ interface PopupProps {
 }
 
 interface dataType {
-  yoil: string;
-  time: string[];
+  day: string;
+  start: string;
+  end: string;
 }
 
 const Popup = ({
@@ -27,9 +28,9 @@ const Popup = ({
       <div className="popup-content">
         {data && (
           <div className="popup-time">
-            <strong>{data.yoil}</strong>
+            <strong>{data.day}</strong>
             <p>
-              {data.time[0]} - {data.time[1]} {data.time[2]}
+              {data.start} - {data.end}
             </p>
           </div>
         )}
