@@ -1,3 +1,16 @@
+type DayOfWeek =
+  | 'monday'
+  | 'tuesday'
+  | 'wednesday'
+  | 'thursday'
+  | 'friday'
+  | 'saturday'
+  | 'sunday';
+
+interface DaySchedule {
+  DayOfWeek: string[];
+}
+
 interface Schedule {
   monday: string[];
   tuesday: string[];
