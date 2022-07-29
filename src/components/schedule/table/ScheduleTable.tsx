@@ -5,22 +5,23 @@ import Popup from "../../layout/Popup";
 import { useQuery } from "@tanstack/react-query";
 import { getSchedule } from "../../../api/httpRequest";
 
-interface dataProps {
-  data: any;
-}
-
 interface timeTypes {
   id: string;
   time: string[];
 }
 
+interface timeDataTypes {}
+
 const ScheduleTable = () => {
   const [popupOpen, setPopupOpen] = useState(false);
+  const [timeData, setTimeData] = useState();
+  const { data } = useQuery<Schedule[] | any>(["schedule"], () =>
+    getSchedule()
+  );
 
-  const { data }: dataProps = useQuery(["schedule"], () => getSchedule());
-
-  const popupHandler = (status: boolean) => {
+  const popupHandler = (status: boolean, time?: object | any) => {
     setPopupOpen(status);
+    if (time) setTimeData(time);
   };
   const deleteHandler = () => {
     alert("삭제완료");
@@ -53,7 +54,12 @@ const ScheduleTable = () => {
                         {times.time[1]} {times.time[2]}
                       </span>
                     </p>
-                    <button type="button" onClick={() => popupHandler(true)}>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        popupHandler(true, { yoil: yoil, time: times.time })
+                      }
+                    >
                       <AiFillCloseCircle />
                     </button>
                   </li>
@@ -63,7 +69,7 @@ const ScheduleTable = () => {
         </div>
       ))}
       <Popup
-        data={{ yoil: "Monday", time: ["09:00", "9:40", "am"] }}
+        data={timeData}
         text="수업을 삭제하시겠습니까?"
         confirm={true}
         open={popupOpen}
