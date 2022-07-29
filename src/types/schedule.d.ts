@@ -1,14 +1,16 @@
 type DayOfWeek =
-  | "monday"
-  | "tuesday"
-  | "wednesday"
-  | "thursday"
-  | "friday"
-  | "saturday"
-  | "sunday";
+  | 'monday'
+  | 'tuesday'
+  | 'wednesday'
+  | 'thursday'
+  | 'friday'
+  | 'saturday'
+  | 'sunday';
 
-interface NewClass {
-  DayOfWeek: [id: string, time: stringp[]];
+interface NewSchedule {
+  days: string[];
+  start: string;
+  end: string;
 }
 
 interface Schedule {
@@ -29,4 +31,4 @@ interface ScheduleProps {
 
 type ScheduleList = ScheduleProps[];
 
-export { ScheduleProps, ScheduleList, Schedule, NewClass };
+export { ScheduleProps, ScheduleList, Schedule, NewSchedule };
