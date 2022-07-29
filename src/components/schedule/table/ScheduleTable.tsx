@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Time from "../cards/Time";
-import { ScheduleList, ScheduleProps, Schedule } from "../../../types/schedule";
+import { ScheduleList, ScheduleProps } from "../../../types/schedule";
 import { AiFillCloseCircle } from "react-icons/ai";
 import Popup from "../../layout/Popup";
+import { useQuery } from "@tanstack/react-query";
+import { getSchedule } from "../../../api/httpRequest";
 
 interface dataProps {
-  data: any;
+  data?: any;
 }
 
 interface timeTypes {
@@ -13,8 +15,11 @@ interface timeTypes {
   time: string[];
 }
 
-const ScheduleTable = ({ data }: dataProps) => {
+const ScheduleTable = () => {
   const [popupOpen, setPopupOpen] = useState(false);
+
+  const { data } = useQuery(["schedule"], () => getSchedule());
+  console.log(data);
 
   const popupHandler = (status: boolean) => {
     setPopupOpen(status);
@@ -37,26 +42,7 @@ const ScheduleTable = ({ data }: dataProps) => {
       ].map((yoil: string, index: number) => (
         <div key={yoil + index} className="table-content">
           <h3>{yoil}</h3>
-          <ul className="table-lists">
-            {data &&
-              data[yoil.toLocaleLowerCase()].map(
-                (times: timeTypes, index: number) => (
-                  <li key={index}>
-                    <p>
-                      <span>
-                        {times.time[0]} {times.time[2]} -
-                      </span>
-                      <span>
-                        {times.time[1]} {times.time[2]}
-                      </span>
-                    </p>
-                    <button type="button" onClick={() => popupHandler(true)}>
-                      <AiFillCloseCircle />
-                    </button>
-                  </li>
-                )
-              )}
-          </ul>
+          <ul className="table-lists">{data && <></>}</ul>
         </div>
       ))}
       <Popup
@@ -72,3 +58,18 @@ const ScheduleTable = ({ data }: dataProps) => {
 };
 
 export default ScheduleTable;
+{
+  /* <li key={index}>
+                    <p>
+                      <span>
+                        {times.time[0]} {times.time[2]} -
+                      </span>
+                      <span>
+                        {times.time[1]} {times.time[2]}
+                      </span>
+                    </p>
+                    <button type="button" onClick={() => popupHandler(true)}>
+                      <AiFillCloseCircle />
+                    </button>
+                  </li> */
+}
