@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../components/layout/Header';
 import Layout from '../components/layout/Layout';
 import ScheduleTable from '../components/schedule/table/ScheduleTable';
-
 import { ScheduleProps } from '../types/schedule';
 import { Link } from 'react-router-dom';
 import '../style/table.scss';
