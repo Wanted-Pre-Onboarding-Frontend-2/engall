@@ -10,8 +10,6 @@ interface timeTypes {
   time: string[];
 }
 
-interface timeDataTypes {}
-
 const ScheduleTable = () => {
   const [popupOpen, setPopupOpen] = useState(false);
   const [timeData, setTimeData] = useState();
@@ -28,6 +26,8 @@ const ScheduleTable = () => {
     setPopupOpen(false);
   };
 
+  Object.values(data).map((v, index) => console.log(v, index));
+
   return (
     <div className="content-wrap table-wrap">
       {[
@@ -43,26 +43,29 @@ const ScheduleTable = () => {
           <h3>{yoil}</h3>
           <ul className="table-lists">
             {data &&
-              data[yoil.toLowerCase()].map(
-                (times: timeTypes, index: number) => (
-                  <li key={index}>
-                    <p>
-                      <span>
-                        {times.time[0]} {times.time[2]} -
-                      </span>
-                      <span>
-                        {times.time[1]} {times.time[2]}
-                      </span>
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        popupHandler(true, { yoil: yoil, time: times.time })
-                      }
-                    >
-                      <AiFillCloseCircle />
-                    </button>
-                  </li>
+              Object.values(data).map((values: any) =>
+                values.days.map(
+                  (day: string, index: number) =>
+                    day === yoil.toLowerCase() && (
+                      <li key={index}>
+                        <p>
+                          <span>{values.start} - </span>
+                          <span>{values.end}</span>
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            popupHandler(true, {
+                              day: day,
+                              start: values.start,
+                              end: values.end,
+                            })
+                          }
+                        >
+                          <AiFillCloseCircle />
+                        </button>
+                      </li>
+                    )
                 )
               )}
           </ul>
@@ -81,3 +84,14 @@ const ScheduleTable = () => {
 };
 
 export default ScheduleTable;
+// day === yoil.toLowerCase() && (
+//   <li key={index}>
+//     <p>
+//       <span></span>
+//       <span></span>
+//     </p>
+//     <button type="button" onClick={() => popupHandler(true)}>
+//       <AiFillCloseCircle />
+//     </button>
+//   </li>
+// );
