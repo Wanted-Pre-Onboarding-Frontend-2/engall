@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { ScheduleList, ScheduleProps, Schedule } from "../../../types/schedule";
-import { AiFillCloseCircle } from "react-icons/ai";
-import Popup from "../../layout/Popup";
-import { useQuery } from "@tanstack/react-query";
-import { getSchedule } from "../../../api/httpRequest";
+import React, { useState } from 'react';
+import { ScheduleList, ScheduleProps, Schedule } from '../../../types/schedule';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import Popup from '../../layout/Popup';
+import { useQuery } from '@tanstack/react-query';
+import { getSchedule } from '../../../api/httpRequest';
 
 interface timeTypes {
   id: string;
@@ -13,7 +13,7 @@ interface timeTypes {
 const ScheduleTable = () => {
   const [popupOpen, setPopupOpen] = useState(false);
   const [timeData, setTimeData] = useState();
-  const { data } = useQuery<Schedule[] | any>(["schedule"], () =>
+  const { data } = useQuery<Schedule[] | any>(['schedule'], () =>
     getSchedule()
   );
 
@@ -22,26 +22,26 @@ const ScheduleTable = () => {
     if (time) setTimeData(time);
   };
   const deleteHandler = () => {
-    alert("삭제완료");
+    alert('삭제완료');
     setPopupOpen(false);
   };
 
   Object.values(data).map((v, index) => console.log(v, index));
 
   return (
-    <div className="content-wrap table-wrap">
+    <div className='content-wrap table-wrap'>
       {[
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
       ].map((yoil: string, index: number) => (
-        <div key={yoil + index} className="table-content">
+        <div key={yoil + index} className='table-content'>
           <h3>{yoil}</h3>
-          <ul className="table-lists">
+          <ul className='table-lists'>
             {data &&
               Object.values(data).map((values: any) =>
                 values.days.map(
@@ -73,7 +73,7 @@ const ScheduleTable = () => {
       ))}
       <Popup
         data={timeData}
-        text="수업을 삭제하시겠습니까?"
+        text='수업을 삭제하시겠습니까?'
         confirm={true}
         open={popupOpen}
         onCloseHandler={() => popupHandler(false)}
@@ -84,14 +84,4 @@ const ScheduleTable = () => {
 };
 
 export default ScheduleTable;
-// day === yoil.toLowerCase() && (
-//   <li key={index}>
-//     <p>
-//       <span></span>
-//       <span></span>
-//     </p>
-//     <button type="button" onClick={() => popupHandler(true)}>
-//       <AiFillCloseCircle />
-//     </button>
-//   </li>
-// );
+
