@@ -12,3 +12,8 @@ export const createSchedule = async (data: NewSchedule) => {
   const { data: response } = await axios.post(`${BASE_URL}/schedule`, data);
   return response.data;
 };
+
+export const deleteSchedule = async (id: number) => {
+  const response = await axios.delete(`${BASE_URL}/schedule/${id}`);
+  return response.data;
+};
