@@ -15,14 +15,14 @@
     {
       "id": 2,
       "days": ["monday", "sunday"],
-      "start": "14:20 PM",
-      "end": "15:00 PM"
+      "start": "14:20 pm",
+      "end": "15:00 pm"
     },
     {
       "id": 3,
       "days": ["monday", "sunday"],
-      "start": "14:20 PM",
-      "end": "15:00 PM"
+      "start": "14:20 pm",
+      "end": "15:00 pm"
     }
   ]
 }
