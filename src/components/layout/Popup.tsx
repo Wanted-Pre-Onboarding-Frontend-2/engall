@@ -1,6 +1,5 @@
-import { useMutation } from "@tanstack/react-query";
-import React from "react";
-import { deleteSchedule } from "../../api/httpRequest";
+import { useMutation } from '@tanstack/react-query';
+import React from 'react';
 
 interface PopupProps {
   data?: dataType;
@@ -26,33 +25,31 @@ const Popup = ({
   onCloseHandler,
   onClickHandler,
 }: PopupProps) => {
-  // console.log(data.id);
-
   return (
-    <div className={`popup ${open && "open"}`}>
-      <div className="popup-content">
+    <div className={`popup ${open && 'open'}`}>
+      <div className='popup-content'>
         {data && (
-          <div className="popup-time">
+          <div className='popup-time'>
             <strong>{data.day}</strong>
             <p>
               {data.start} - {data.end}
             </p>
           </div>
         )}
-        <div className="popup-text">{text}</div>
-        <div className="popup-btn">
+        <div className='popup-text'>{text}</div>
+        <div className='popup-btn'>
           {confirm ? (
-            <div className="btns">
+            <div className='btns'>
               <button
-                type="button"
-                className="btn btn-type1 medium"
+                type='button'
+                className='btn btn-type1 medium'
                 onClick={onClickHandler}
               >
                 YES
               </button>
               <button
-                type="button"
-                className="btn btn-type2 medium"
+                type='button'
+                className='btn btn-type2 medium'
                 onClick={onCloseHandler}
               >
                 NO
@@ -60,8 +57,8 @@ const Popup = ({
             </div>
           ) : (
             <button
-              type="button"
-              className="btn btn-type1 medium"
+              type='button'
+              className='btn btn-type1 medium'
               onClick={onCloseHandler}
             >
               close
