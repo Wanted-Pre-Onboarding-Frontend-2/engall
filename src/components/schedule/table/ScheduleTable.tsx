@@ -1,29 +1,26 @@
 import React, { useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import Popup from '../../layout/Popup';
-
 import { daysOfWeek } from '../../../utils/getDate';
-
 import { Schedule } from '../../../types/schedule';
-
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { deleteSchedule, getSchedule } from '../../../api/httpRequest';
 
 const ScheduleTable = () => {
   const [popupOpen, setPopupOpen] = useState(false);
   const [timeData, setTimeData] = useState<any>();
-  // console.log(timeData.id);
+
+  const queryClient = useQueryClient();
+
   const { data } = useQuery<Schedule[] | any>(['schedule'], () =>
     getSchedule()
   );
-  const queryClient = useQueryClient();
 
   const deleteMutation = useMutation((id: number) => deleteSchedule(id), {
     onSuccess: () => {
       queryClient.invalidateQueries(['schedule']);
     },
   });
-  // deleteMutaion.mutate(data.id)
 
   const popupHandler = (status: boolean, time?: object | any) => {
     setPopupOpen(status);
