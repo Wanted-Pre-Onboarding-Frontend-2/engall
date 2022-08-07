@@ -28,12 +28,89 @@
 # 폴더구조
 
 ```
-
+src
+ ┣ api
+ ┃ ┗ httpRequest.ts
+ ┣ components
+ ┃ ┣ layout
+ ┃ ┃ ┣ Header.tsx
+ ┃ ┃ ┣ Layout.tsx
+ ┃ ┃ ┗ Popup.tsx
+ ┃ ┗ schedule
+ ┃ ┃ ┣ cards
+ ┃ ┃ ┃ ┣ Time.tsx
+ ┃ ┃ ┃ ┗ Weekdays.tsx
+ ┃ ┃ ┣ dropdowns
+ ┃ ┃ ┃ ┣ Time.tsx
+ ┃ ┃ ┃ ┗ Weekdays.tsx
+ ┃ ┃ ┣ form
+ ┃ ┃ ┃ ┗ AddForm.tsx
+ ┃ ┃ ┗ table
+ ┃ ┃ ┃ ┗ ScheduleTable.tsx
+ ┣ hooks
+ ┃ ┗ useDate.tsx
+ ┣ images
+ ┃ ┗ icon_arrow_unfold.svg
+ ┣ pages
+ ┃ ┣ AddClass.tsx
+ ┃ ┣ Home.tsx
+ ┃ ┣ NotFound404.tsx
+ ┃ ┗ ViewClass.tsx
+ ┣ router
+ ┃ ┗ Routes.tsx
+ ┣ static
+ ┃ ┗ image
+ ┃ ┃ ┗ Logo.svg
+ ┣ store
+ ┃ ┗ global.ts
+ ┣ style
+ ┃ ┣ base
+ ┃ ┃ ┣ _fonts.scss
+ ┃ ┃ ┣ _more.scss
+ ┃ ┃ ┗ _reset.scss
+ ┃ ┣ constants
+ ┃ ┃ ┣ _colors.scss
+ ┃ ┃ ┗ _mixin.scss
+ ┃ ┣ form.scss
+ ┃ ┣ index.js
+ ┃ ┣ index.scss
+ ┃ ┣ layout.scss
+ ┃ ┗ table.scss
+ ┣ types
+ ┃ ┣ alltypes.d.ts
+ ┃ ┣ schedule.d.ts
+ ┃ ┣ types.d.ts
+ ┃ ┗ user.d.ts
+ ┣ utils
+ ┃ ┗ getDate.ts
+ ┣ index.tsx
+ ┗ react-app-env.d.ts
 ```
 
 </br>
 
 # 실행 방법
+
+```
+- mac일 경우
+1. git clone https://github.com/Wanted-Pre-Onboarding-Frontend-2/Wan2trip.git
+2. cd [folder name]
+3. yarn install
+4. yarn start
+하면 json-server가 같이 실행됩니다.
+
+- window일 경우
+1. git clone https://github.com/Wanted-Pre-Onboarding-Frontend-2/Wan2trip.git
+2. cd [folder name]
+3. yarn install
+
+4. 터미널을 2개로 분할
+5. 1번터미널 : yarn start
+6. 2번터미널 : cd [folder name]
+7. 2번터미널 : yarn server
+
+json-server를 따로 켜주셔야 합니다.
+```
 
 </br>
 
@@ -50,19 +127,17 @@
   - react-query get, delete 구현
   - delete -> useMutation사용
 
-  ```ts
-  const queryClient = useQueryClient();
+```ts
+const queryClient = useQueryClient();
 
-  const { data } = useQuery<Schedule[] | any>(["schedule"], () =>
-    getSchedule()
-  );
+const { data } = useQuery<Schedule[] | any>(["schedule"], () => getSchedule());
 
-  const deleteMutation = useMutation((id: number) => deleteSchedule(id), {
-    onSuccess: () => {
-      queryClient.invalidateQueries(["schedule"]);
-    },
-  });
-  ```
+const deleteMutation = useMutation((id: number) => deleteSchedule(id), {
+  onSuccess: () => {
+    queryClient.invalidateQueries(["schedule"]);
+  },
+});
+```
 
 ## UI
 
