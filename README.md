@@ -7,8 +7,8 @@
 | 이름   |       팀 구성       |  기능 구현 및 역할   |
 | ------ | :-----------------: | :------------------: |
 | 이상지 | 팀장 </br> Frontend | React Query API 구현 |
-| 김수빈 | 팀원 </br> Frontend |                      |
-| 김민주 | 팀원 </br> Frontend |     중복 일정 막기   |
+| 김수빈 | 팀원 </br> Frontend |  UI, 일정 추가/확인  |
+| 김민주 | 팀원 </br> Frontend |    중복 일정 막기    |
 
 # 기술 스택
 
@@ -21,7 +21,7 @@
 `axois`
 `json-server`
 `SCSS`
-
+`date-fns`
 </br>
 </br>
 
@@ -53,21 +53,61 @@
   ```ts
   const queryClient = useQueryClient();
 
-  const { data } = useQuery<Schedule[] | any>(['schedule'], () =>
+  const { data } = useQuery<Schedule[] | any>(["schedule"], () =>
     getSchedule()
   );
 
   const deleteMutation = useMutation((id: number) => deleteSchedule(id), {
     onSuccess: () => {
-      queryClient.invalidateQueries(['schedule']);
+      queryClient.invalidateQueries(["schedule"]);
     },
   });
   ```
 
+## UI
+
+**schedule table**<br>
+<img width="1440" alt="table" src="https://user-images.githubusercontent.com/90506668/183299833-be8703ee-dc24-462b-be1e-05b08548cd00.png">
+
+<br>
+
+**form**<br>
+<img width="1438" alt="form" src="https://user-images.githubusercontent.com/90506668/183299907-13f7f968-96e2-44dd-8c6c-c7f5baea93af.png">
+
+## 일정 확인
+
+ScheduleTable.tsx
+
+- api에 등록된 데이터를 요일, 시간에 맞게 렌더링되도록 구현
+
+## 일정 추가
+
+AddForm.tsx
+
+- utils/getDate.ts에 입력할 요일, 시, 분, am/pm을 분리하여 파일 생성
+- 선택된 요일과 시간을 react-query useMutation 사용하여 추가되도록 구현
+
+```ts
+const { mutate } = useMutation(createSchedule, {
+  onMutate: (variables) => {
+    if (JSON.stringify(data) === JSON.stringify(variables)) {
+      setPopupOpen(true);
+    } else {
+      alert("추가되었습니다.");
+      navigate("/view");
+    }
+  },
+  onSuccess: (data) => {
+    queryClient.invalidateQueries(["schedule"]);
+  },
+});
+```
+
+- 데이터가 성공적으로 추가되면 쿼리 데이터를 새로 받아 올 수 있도록 함(invalidateQueries)
+- 일정 등록 후 일정 확인 페이지로 이동하여 추가된 일정을 볼 수 있도록 함
+
 ## 일정 추가시 중복 막기
+
 - 선택한 일정과 이미 저장된 일정의 배열값을 가져와 비교 후 중복 일 경우 alret로 일정 추가 막기
 
   -> 단순 수업 시작시간 비교가 아닌 시작 후 40분간 모든 시간을 중복으로 봐야하므로 중복비교가 안됨 **(리팩토링 필요)**
-
-
-```
