@@ -41,3 +41,4 @@ export const MINUTES = [
 ];
 
 export const MERIDIEMS = ["am", "pm"];
+export const CLASSTIME = 40;
