@@ -7,6 +7,7 @@ import { HOURS, MINUTES, MERIDIEMS, daysOfWeek } from "../../../utils/getDate";
 import { useNavigate } from "react-router-dom";
 import Popup from "../../layout/Popup";
 import { submitTime } from "../../../hooks/useDate";
+import { duplicateTime } from "../../../hooks/useDuplicateTime";
 
 const date = new Date();
 const today = format(date, "yyyy-MM-dd");
@@ -45,24 +46,19 @@ const AddForm = () => {
 
   const handleChangeCheckbox = (event: ChangeEvent<HTMLInputElement>) => {
     const checked = event.target.checked;
+    const value = event.target.value;
 
     if (checked) {
-      setDays([...days, event.target.value]);
+      setDays([...days, value]);
+    } else {
+      setDays(days.filter((el) => el !== value));
     }
   };
 
   const { mutate } = useMutation(createSchedule, {
-    onMutate: (variables) => {
-      // if (JSON.stringify(data) === JSON.stringify(variables)) {
-      //   setPopupOpen(true);
-      // } else {
-      //   alert("추가되었습니다.");
-      //   navigate("/view");
-      // }
-    },
+    onMutate: (variables) => {},
     onSuccess: (data) => {
       queryClient.invalidateQueries(["schedule"]);
-      console.log(data);
     },
   });
 
@@ -79,10 +75,21 @@ const AddForm = () => {
         start: `${startTime} ${times.meridiem}`,
         end: `${endTime} ${times.meridiem}`,
       };
-      mutate(newSchedule);
-    });
 
-    // 중복 막기
+      const yoilData: any = data?.filter(
+        (day: any) => day.day === newSchedule.day
+      );
+
+      const isDuplicate: boolean = duplicateTime(newSchedule, yoilData);
+
+      if (isDuplicate) {
+        // mutate(newSchedule);
+        alert("일정이 추가되었습니다.");
+        navigate("/view");
+      } else {
+        setPopupOpen(true);
+      }
+    });
   };
 
   return (
