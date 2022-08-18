@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { ScheduleTypes } from "../types/schedule";
 
 export const loadedStatus = atom({
   key: "loadedStatus",
@@ -13,4 +14,9 @@ export const activeStatus = atom({
 export const openStatus = atom({
   key: "openStatus",
   default: false,
+});
+
+export const TimeTableData = atom<ScheduleTypes[]>({
+  key: "TimeTableData",
+  default: [],
 });
