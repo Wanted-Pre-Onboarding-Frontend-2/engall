@@ -83,7 +83,7 @@ const AddForm = () => {
       const isDuplicate: boolean = duplicateTime(newSchedule, yoilData);
 
       if (isDuplicate) {
-        // mutate(newSchedule);
+        mutate(newSchedule);
         alert("일정이 추가되었습니다.");
         navigate("/view");
       } else {
