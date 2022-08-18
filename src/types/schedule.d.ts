@@ -7,8 +7,9 @@ type DayOfWeek =
   | "saturday"
   | "sunday";
 
-interface NewSchedule {
-  days: string[] | string;
+interface ScheduleTypes {
+  id?: number;
+  day: string[] | string;
   start: string;
   end: string;
 }
@@ -31,4 +32,4 @@ interface ScheduleProps {
 
 type ScheduleList = ScheduleProps[];
 
-export { ScheduleProps, ScheduleList, Schedule, NewSchedule };
+export { ScheduleProps, ScheduleList, Schedule, ScheduleTypes };

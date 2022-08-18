@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { FormEvent, ChangeEvent, useState } from "react";
-import { Schedule, NewSchedule } from "../../../types/schedule";
+import { Schedule, ScheduleTypes } from "../../../types/schedule";
 import { createSchedule, getSchedule } from "../../../api/httpRequest";
 import { add, format } from "date-fns";
 import { HOURS, MINUTES, MERIDIEMS, daysOfWeek } from "../../../utils/getDate";
@@ -53,17 +53,17 @@ const AddForm = () => {
 
   const { mutate } = useMutation(createSchedule, {
     onMutate: (variables) => {
-      if (JSON.stringify(data) === JSON.stringify(variables)) {
-        setPopupOpen(true);
-      } else {
-        alert("추가되었습니다.");
-        navigate("/view");
-      }
+      // if (JSON.stringify(data) === JSON.stringify(variables)) {
+      //   setPopupOpen(true);
+      // } else {
+      //   alert("추가되었습니다.");
+      //   navigate("/view");
+      // }
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries(["schedule"]);
+      console.log(data);
     },
-    onSettled: () => {},
   });
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -73,13 +73,16 @@ const AddForm = () => {
     const submitDate = new Date(`${today} ${startTimeStr}`);
     const { startTime, endTime } = submitTime(submitDate, times.meridiem);
 
-    const newSchedule: NewSchedule = {
-      days: days,
-      start: `${startTime} ${times.meridiem}`,
-      end: `${endTime} ${times.meridiem}`,
-    };
+    days.map((day: string) => {
+      const newSchedule: ScheduleTypes = {
+        day: day,
+        start: `${startTime} ${times.meridiem}`,
+        end: `${endTime} ${times.meridiem}`,
+      };
+      mutate(newSchedule);
+    });
 
-    mutate(newSchedule);
+    // 중복 막기
   };
 
   return (
