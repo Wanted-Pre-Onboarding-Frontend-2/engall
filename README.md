@@ -191,4 +191,5 @@ const { mutate } = useMutation(createSchedule, {
 
 - 시간을 숫자로 변경하고 중복된 시간의 수 인지 비교하여 검사하는 로직으로 구현
   -> 자세한 내용은 블로그 글 참고
+  <br>
   https://velog.io/@soob1008/TIL-wanted-pre-onboarding-%EC%9D%BC%EC%A0%95-%EB%93%B1%EB%A1%9D-%EC%A4%91%EB%B3%B5-%EB%B0%A9%EC%A7%80
