@@ -186,3 +186,9 @@ const { mutate } = useMutation(createSchedule, {
 - 선택한 일정과 이미 저장된 일정의 배열값을 가져와 비교 후 중복 일 경우 alret로 일정 추가 막기
 
   -> 단순 수업 시작시간 비교가 아닌 시작 후 40분간 모든 시간을 중복으로 봐야하므로 중복비교가 안됨 **(리팩토링 필요)**
+
+## 일정 추가 중복 방지 리팩토링(수빈)
+
+- 시간을 숫자로 변경하고 중복된 시간의 수 인지 비교하여 검사하는 로직으로 구현
+  -> 자세한 내용은 블로그 글 참고
+  https://velog.io/@soob1008/TIL-wanted-pre-onboarding-%EC%9D%BC%EC%A0%95-%EB%93%B1%EB%A1%9D-%EC%A4%91%EB%B3%B5-%EB%B0%A9%EC%A7%80
