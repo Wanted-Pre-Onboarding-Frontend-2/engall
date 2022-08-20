@@ -1,15 +1,12 @@
 import { ScheduleTypes } from "../types/schedule";
 import { CLASSTIME } from "../utils/getDate";
 
-export const duplicateTime = (
-  current: ScheduleTypes,
-  times: ScheduleTypes[]
-) => {
+export const duplicateTime = (input: ScheduleTypes, times: ScheduleTypes[]) => {
   let isDuplicate = true;
 
-  const currentMridiem = getMridiem(current.start);
-  const currentStartTime = timeToNumber(current.start, currentMridiem);
-  const currentEndTime = timeToNumber(current.end, currentMridiem);
+  const inputMridiem = getMridiem(input.start);
+  const inputStartTime = timeToNumber(input.start, inputMridiem);
+  const inputEndTime = timeToNumber(input.end, inputMridiem);
 
   times &&
     Object.values(times).map((time: ScheduleTypes) => {
@@ -18,9 +15,9 @@ export const duplicateTime = (
       const endTime = timeToNumber(time.end, timeMridiem);
 
       if (
-        currentMridiem === timeMridiem &&
-        currentStartTime > Math.floor(startTime - CLASSTIME) &&
-        currentEndTime < Math.floor(endTime + CLASSTIME)
+        inputMridiem === timeMridiem &&
+        inputStartTime > Math.floor(startTime - CLASSTIME) &&
+        inputEndTime < Math.floor(endTime + CLASSTIME)
       ) {
         isDuplicate = false;
       }
