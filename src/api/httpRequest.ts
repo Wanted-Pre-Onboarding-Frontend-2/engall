@@ -1,19 +1,17 @@
-import axios from "axios";
-import { Schedule, ScheduleTypes } from "../types/schedule";
+import { axiosInstance } from './../axiosInstance/index';
+import { Schedule, ScheduleTypes } from '../types/schedule';
 
-const BASE_URL = "http://localhost:8000";
+export const getSchedule = async (): Promise<Schedule[]> => {
+  const { data } = await axiosInstance.get('/schedule');
+  return data;
+};
 
-export const getSchedule = () =>
-  axios
-    .get<Schedule[]>(`${BASE_URL}/schedule`)
-    .then((response) => response.data);
-
-export const createSchedule = async (data: ScheduleTypes) => {
-  const { data: response } = await axios.post(`${BASE_URL}/schedule`, data);
+export const createSchedule = async (data: ScheduleTypes): Promise<void> => {
+  const { data: response } = await axiosInstance.post('/schedule', data);
   return response.data;
 };
 
 export const deleteSchedule = async (id: number) => {
-  const response = await axios.delete(`${BASE_URL}/schedule/${id}`);
+  const response = await axiosInstance.delete(`/schedule/${id}`);
   return response.data;
 };

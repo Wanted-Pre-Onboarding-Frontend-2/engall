@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { AiFillCloseCircle } from "react-icons/ai";
-import Popup from "../../layout/Popup";
-import { daysOfWeek } from "../../../utils/getDate";
-import { Schedule } from "../../../types/schedule";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteSchedule, getSchedule } from "../../../api/httpRequest";
+import React, { useEffect, useState } from 'react';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import Popup from '../../layout/Popup';
+import { daysOfWeek } from '../../../utils/getDate';
+import { Schedule } from '../../../types/schedule';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { deleteSchedule, getSchedule } from '../../../api/httpRequest';
+import { queryClient } from '../../../hooks/queries/queryClient';
 
 const ScheduleTable = () => {
   const [popupOpen, setPopupOpen] = useState(false);
   const [timeData, setTimeData] = useState<any>();
-  const queryClient = useQueryClient();
 
-  const { data } = useQuery<Schedule[]>(["schedule"], () => getSchedule());
+  const { data } = useQuery(['schedule'], () => getSchedule());
 
   const deleteMutation = useMutation((id: number) => deleteSchedule(id), {
     onSuccess: () => {
-      queryClient.invalidateQueries(["schedule"]);
+      queryClient.invalidateQueries(['schedule']);
     },
   });
 
@@ -25,17 +25,17 @@ const ScheduleTable = () => {
   };
 
   const deleteHandler = (id: number) => {
-    alert("삭제완료");
+    alert('삭제완료');
     setPopupOpen(false);
     deleteMutation.mutate(id);
   };
 
   return (
-    <div className="content-wrap table-wrap">
+    <div className='content-wrap table-wrap'>
       {daysOfWeek.map((yoil: string, index: number) => (
-        <div key={yoil + index} className="table-content">
+        <div key={yoil + index} className='table-content'>
           <h3>{yoil.charAt(0).toUpperCase() + yoil.slice(1)}</h3>
-          <ul className="table-lists">
+          <ul className='table-lists'>
             {data &&
               Object.values(data).map(
                 (value: any) =>
@@ -46,7 +46,7 @@ const ScheduleTable = () => {
                         <span>{value.end}</span>
                       </p>
                       <button
-                        type="button"
+                        type='button'
                         onClick={() =>
                           popupHandler(true, {
                             id: value.id,
@@ -66,7 +66,7 @@ const ScheduleTable = () => {
       ))}
       <Popup
         data={timeData}
-        text="수업을 삭제하시겠습니까?"
+        text='수업을 삭제하시겠습니까?'
         confirm={true}
         open={popupOpen}
         onCloseHandler={() => popupHandler(false)}

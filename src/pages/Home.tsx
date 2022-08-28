@@ -2,7 +2,7 @@ import React from 'react';
 
 import Layout from '../components/layout/Layout';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from 'react-query';
 import axios, { AxiosError } from 'axios';
 import '../style/layout.scss';
 
