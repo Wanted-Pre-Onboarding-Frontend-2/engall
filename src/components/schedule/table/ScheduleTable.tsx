@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import Popup from '../../layout/Popup';
 import { daysOfWeek } from '../../../utils/getDate';
-import { Schedule } from '../../../types/schedule';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { deleteSchedule, getSchedule } from '../../../api/httpRequest';
-import { queryClient } from '../../../hooks/queries/queryClient';
+import { queryClient } from '../../../queries/queryClient';
 
 const ScheduleTable = () => {
   const [popupOpen, setPopupOpen] = useState(false);

@@ -1,4 +1,4 @@
-import { axiosInstance } from './../axiosInstance/index';
+import { axiosInstance } from './axiosInstance/index';
 import { Schedule, ScheduleTypes } from '../types/schedule';
 
 export const getSchedule = async (): Promise<Schedule[]> => {

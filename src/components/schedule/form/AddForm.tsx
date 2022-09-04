@@ -6,10 +6,10 @@ import { format } from 'date-fns';
 import Popup from '../../layout/Popup';
 import { HOURS, MINUTES, MERIDIEMS, daysOfWeek } from '../../../utils/getDate';
 
-import { submitTime } from '../../../hooks/useDate';
-import { duplicateTime } from '../../../hooks/useDuplicateTime';
-import { useAddSchedule } from '../../../hooks/queries/useAddSchedule';
-import { useGetSchedule } from '../../../hooks/queries/useGetSchedule';
+import { setTime } from '../../../utils/setTime';
+import { checkDuplication } from '../../../utils/checkDuplication';
+import { useAddSchedule } from '../../../hooks/query/useAddSchedule';
+import { useGetSchedule } from '../../../hooks/query/useGetSchedule';
 
 const date = new Date();
 const today = format(date, 'yyyy-MM-dd');
@@ -17,7 +17,7 @@ const today = format(date, 'yyyy-MM-dd');
 interface TimeTypes {
   hour: string;
   minute: string;
-  meridiem: string;
+  meridiem: string; // TODO: 이걸..isAfternoon 으로 해서 true, false로 바꾸기
 }
 
 const AddForm = () => {
@@ -63,20 +63,20 @@ const AddForm = () => {
 
     const startTimeStr = `${times.hour}:${times.minute}`;
     const submitDate = new Date(`${today} ${startTimeStr}`);
-    const { startTime, endTime } = submitTime(submitDate, times.meridiem);
+    const { startTime, endTime } = setTime(submitDate, times.meridiem);
 
     days.map((day: string) => {
       const newSchedule: ScheduleTypes = {
         day: day,
-        start: `${startTime} ${times.meridiem}`,
-        end: `${endTime} ${times.meridiem}`,
+        startTime: `${startTime} ${times.meridiem}`,
+        endTime: `${endTime} ${times.meridiem}`,
       };
 
       const yoilData: any = schedules?.filter(
         (day: any) => day.day === newSchedule.day
       );
 
-      const isDuplicate: boolean = duplicateTime(newSchedule, yoilData);
+      const isDuplicate: boolean = checkDuplication(newSchedule, yoilData);
 
       if (isDuplicate) {
         addSchedule(newSchedule);
