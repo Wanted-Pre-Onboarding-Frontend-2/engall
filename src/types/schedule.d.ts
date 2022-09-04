@@ -1,17 +1,17 @@
 type DayOfWeek =
-  | "monday"
-  | "tuesday"
-  | "wednesday"
-  | "thursday"
-  | "friday"
-  | "saturday"
-  | "sunday";
+  | 'monday'
+  | 'tuesday'
+  | 'wednesday'
+  | 'thursday'
+  | 'friday'
+  | 'saturday'
+  | 'sunday';
 
 interface ScheduleTypes {
   id?: number;
   day: string[] | string;
-  start: string;
-  end: string;
+  startTime: string; // 통일하려고 start -> startTime으로 바꿈
+  endTime: string;
 }
 
 interface Schedule {
