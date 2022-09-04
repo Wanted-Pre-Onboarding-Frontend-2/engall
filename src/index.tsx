@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom/client';
 import Routes from './router/Routes';
 import { RecoilRoot } from 'recoil';
 import { QueryClientProvider } from 'react-query';
-
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { queryClient } from './queries/queryClient';
 import './style/index.scss';
-import { queryClient } from './hooks/queries/queryClient';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
