@@ -130,11 +130,11 @@ json-server를 따로 켜주셔야 합니다.
 ```ts
 const queryClient = useQueryClient();
 
-const { data } = useQuery<Schedule[] | any>(["schedule"], () => getSchedule());
+const { data } = useQuery<Schedule[] | any>(['schedule'], () => getSchedule());
 
 const deleteMutation = useMutation((id: number) => deleteSchedule(id), {
   onSuccess: () => {
-    queryClient.invalidateQueries(["schedule"]);
+    queryClient.invalidateQueries(['schedule']);
   },
 });
 ```
@@ -168,12 +168,12 @@ const { mutate } = useMutation(createSchedule, {
     if (JSON.stringify(data) === JSON.stringify(variables)) {
       setPopupOpen(true);
     } else {
-      alert("추가되었습니다.");
-      navigate("/view");
+      alert('추가되었습니다.');
+      navigate('/view');
     }
   },
   onSuccess: (data) => {
-    queryClient.invalidateQueries(["schedule"]);
+    queryClient.invalidateQueries(['schedule']);
   },
 });
 ```
@@ -193,3 +193,5 @@ const { mutate } = useMutation(createSchedule, {
   -> 자세한 내용은 블로그 글 참고
   <br>
   https://velog.io/@soob1008/TIL-wanted-pre-onboarding-%EC%9D%BC%EC%A0%95-%EB%93%B1%EB%A1%9D-%EC%A4%91%EB%B3%B5-%EB%B0%A9%EC%A7%80
+
+<br>
