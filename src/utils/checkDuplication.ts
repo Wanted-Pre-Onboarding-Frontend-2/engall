@@ -10,10 +10,8 @@ const timeStrToNum = (timeStr: string, meridiem: string) => {
 
 // pm 또는 am을 반환하는 함수
 const getMeridian = (timeStr: any) => {
-  console.log(timeStr);
-  const meridian = timeStr.split(' ')[1];
-  console.log(meridian);
-
+  console.log('timeStr', timeStr);
+  const meridian = timeStr.split(' ')[1]; // TODO: ERROR
   return meridian;
 };
 
