@@ -9,8 +9,9 @@ const timeStrToNum = (timeStr: string, meridiem: string) => {
 };
 
 // pm 또는 am을 반환하는 함수
-const getMeridian = (timeStr: string) => {
-  const meridian = timeStr.split(' ')[1];
+const getMeridian = (timeStr: any) => {
+  console.log('timeStr', timeStr);
+  const meridian = timeStr.split(' ')[1]; // TODO: ERROR
   return meridian;
 };
 
@@ -41,3 +42,16 @@ export const checkDuplication = (
 
   return isDuplicate;
 };
+
+// function timeStrToNum(time: string, mridiem: string) {
+//   const str = Number(time.split(' ')[0].replace(':', ''));
+//   const result = mridiem === 'pm' ? Math.floor(str + 1200) : str;
+
+//   return result;
+// }
+
+// function getMeridian(time: string) {
+//   const str = time.split(' ')[1];
+
+//   return str;
+// }

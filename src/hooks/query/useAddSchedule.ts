@@ -1,4 +1,4 @@
-import { createSchedule } from '../../api/httpRequest';
+import { createSchedule } from '../../api/ScheduleAPI';
 import { useMutation } from 'react-query';
 import { ScheduleTypes } from '../../types/schedule';
 import { queryClient } from '../../queries/queryClient';
