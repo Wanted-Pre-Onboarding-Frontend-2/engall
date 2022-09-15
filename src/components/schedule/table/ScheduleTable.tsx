@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import Popup from '../../layout/Popup';
 import { daysOfWeek } from '../../../utils/getDate';
-import { useMutation, useQuery } from 'react-query';
-import { deleteSchedule, getSchedule } from '../../../api/httpRequest';
-import { queryClient } from '../../../queries/queryClient';
+import { useGetSchedule } from '../../../hooks/query/useGetSchedule';
+import { useDeleteSchedule } from '../../../hooks/query/useDeleteSchedule';
 
 const ScheduleTable = () => {
   const [popupOpen, setPopupOpen] = useState(false);
   const [timeData, setTimeData] = useState<any>();
 
-  const { data } = useQuery(['schedule'], () => getSchedule());
-
-  const deleteMutation = useMutation((id: number) => deleteSchedule(id), {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['schedule']);
-    },
-  });
+  const schedules = useGetSchedule();
+  const deleteSchedule = useDeleteSchedule();
 
   const popupHandler = (status: boolean, time?: object | any) => {
     setPopupOpen(status);
@@ -26,7 +20,7 @@ const ScheduleTable = () => {
   const deleteHandler = (id: number) => {
     alert('삭제완료');
     setPopupOpen(false);
-    deleteMutation.mutate(id);
+    deleteSchedule(id);
   };
 
   return (
@@ -35,8 +29,8 @@ const ScheduleTable = () => {
         <div key={yoil + index} className='table-content'>
           <h3>{yoil.charAt(0).toUpperCase() + yoil.slice(1)}</h3>
           <ul className='table-lists'>
-            {data &&
-              Object.values(data).map(
+            {schedules &&
+              Object.values(schedules).map(
                 (value: any) =>
                   value.day === yoil.toLowerCase() && (
                     <li key={value.id}>
