@@ -4,11 +4,11 @@
 
 # 구성원
 
-| 이름   |       팀 구성       |  기능 구현 및 역할   |
-| ------ | :-----------------: | :------------------: |
-| 이상지 | 팀장 </br> Frontend | React Query API 구현 |
-| 김수빈 | 팀원 </br> Frontend |  UI, 일정 추가/확인  |
-| 김민주 | 팀원 </br> Frontend |    중복 일정 막기    |
+| 이름   |       팀 구성       |           기능 구현 및 역할            |
+| ------ | :-----------------: | :------------------------------------: |
+| 이상지 | 팀장 </br> Frontend | React-Query API 구현, mock server 설정 |
+| 김수빈 | 팀원 </br> Frontend |           UI, 일정 추가/확인           |
+| 김민주 | 팀원 </br> Frontend |             중복 일정 막기             |
 
 # 기술 스택
 
@@ -116,28 +116,36 @@ json-server를 따로 켜주셔야 합니다.
 
 # 상세 구현 설명
 
+## Mock server setting
+
+📂 public/data
+
+- json 파일을 저장하고 index.js에서 combinedRoutes 설정
+- json server를 사용
+  📎 package.json
+
+```js
+  "scripts": {
+    "start": "react-scripts start & yarn server",
+    "server": "json-server --watch ./public/data/index.js --port 8000"
+```
+
 ## API
 
-- src / index.ts
-  - react-query 초기세팅
-- httpRequest.ts
-  - axios를 사용해 get, post, delete로직 구현
-- ScheduleTable.tsx
+📂 src/api
 
-  - react-query get, delete 구현
-  - delete -> useMutation사용
+- axios instance 설정
+- axios를 사용하여 get, post, delete api 구현 (ScheduleAPI.ts )
 
-```ts
-const queryClient = useQueryClient();
+📂 src/hook/query
 
-const { data } = useQuery<Schedule[] | any>(['schedule'], () => getSchedule());
+- useQuery와 useMutation을 이용하여 커스텀훅을 구현하여 서비스 로직과 api 로직을 분리
+  (useGetSchedule.ts, useAddSchedule.ts, useDeleteSchedule.ts )
 
-const deleteMutation = useMutation((id: number) => deleteSchedule(id), {
-  onSuccess: () => {
-    queryClient.invalidateQueries(['schedule']);
-  },
-});
-```
+📂 queries
+
+- queryKey 값을 독립적인 파일로 분리 (queryKey.js)
+- queryClient객체를 설정 (constants.js)
 
 ## UI
 
@@ -180,12 +188,6 @@ const { mutate } = useMutation(createSchedule, {
 
 - 데이터가 성공적으로 추가되면 쿼리 데이터를 새로 받아 올 수 있도록 함(invalidateQueries)
 - 일정 등록 후 일정 확인 페이지로 이동하여 추가된 일정을 볼 수 있도록 함
-
-## 일정 추가시 중복 막기
-
-- 선택한 일정과 이미 저장된 일정의 배열값을 가져와 비교 후 중복 일 경우 alret로 일정 추가 막기
-
-  -> 단순 수업 시작시간 비교가 아닌 시작 후 40분간 모든 시간을 중복으로 봐야하므로 중복비교가 안됨 **(리팩토링 필요)**
 
 ## 일정 추가 중복 방지 리팩토링(수빈)
 
